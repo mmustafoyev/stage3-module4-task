@@ -25,6 +25,7 @@ public abstract class NewsMapper {
     public abstract List<NewsDtoResponse> modelListToDtoList(List<News> modelList);
 
     @Mapping(source = "author", target = "authorDto")
+    @Mapping(source = "comments", target = "commentsDto")
     public abstract NewsDtoResponse modelToDto(News model);
 
     @Mapping(target = "createTime", ignore = true)
@@ -33,8 +34,7 @@ public abstract class NewsMapper {
         "java(authorRepository.getReference(dto.authorId()))")
     @Mapping(target = "tags", expression =
         "java(dto.tagsIds().stream().map(tagId -> tagRepository.getReference(tagId)).toList())")
-//    @Mapping(target = "comments", expression =
-//            "java(dto.")
+    @Mapping(target = "comments", ignore = true)
     public abstract News dtoToModel(NewsDtoRequest dto);
 
 

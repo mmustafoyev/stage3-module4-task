@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/tags")
+@RestController
+@RequestMapping("/tags")
 public class TagController {
     private final TagService tagService;
 
@@ -31,7 +32,7 @@ public class TagController {
         return tagService.readById(id);
     }
     @CommandHandler(operation = 22)
-    @GetMapping
+    @GetMapping("/{newsId}")
     @ResponseStatus(HttpStatus.OK)
     public TagDtoResponse getByNewsId(@PathVariable Long newsId) {
         return tagService.readByNewsId(newsId);

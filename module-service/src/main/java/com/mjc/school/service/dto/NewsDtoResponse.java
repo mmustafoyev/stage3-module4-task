@@ -9,6 +9,8 @@ public record NewsDtoResponse(
     String content,
     LocalDateTime createdDate,
     LocalDateTime lastUpdatedDate,
-    AuthorDtoResponse authorDto
+    AuthorDtoResponse authorDto,
+    List<TagDtoResponse> tagsDto,
+    List<CommentDtoResponse> commentsDto
 ) {
 }

@@ -29,7 +29,7 @@ public class AuthorController {
         return authorService.readById(id);
     }
     @CommandHandler(operation = 21)
-    @GetMapping("/authors")
+    @GetMapping("/authors/{newsId}")
     @ResponseStatus(HttpStatus.OK)
     public AuthorDtoResponse getByNewsId(@PathVariable Long newsId) {
         return authorService.readByNewsId(newsId);

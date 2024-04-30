@@ -7,6 +7,7 @@ public record NewsDtoRequest(
     String title,
     String content,
     Long authorId,
-    List<Long> tagsIds
+    List<Long> tagsIds,
+    List<Long> commentIds
 ) {
 }

@@ -12,6 +12,7 @@ import java.util.List;
 public interface CommentMapper {
     List<CommentDtoResponse> listModelToDto(List<Comment> comments);
 
+    @Mapping(source = "news", target = "newsDtoResponse")
     CommentDtoResponse modelToDto(Comment comment);
     @Mapping(target = "createTime", ignore = true)
     @Mapping(target = "lastUpdateTime", ignore = true)
