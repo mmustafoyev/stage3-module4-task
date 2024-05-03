@@ -20,8 +20,10 @@ public class AuthorController {
     @CommandHandler(operation = 6)
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<AuthorDtoResponse> getAuthors() {
-        return authorService.readAll();
+    public List<AuthorDtoResponse> getAuthors(@RequestParam(defaultValue = "1", required = false) int page,
+                                              @RequestParam(defaultValue = "10", required = false) int size,
+                                              @RequestParam(name = "sort_by", defaultValue = "id::asc", required = false) String sortBy) {
+        return authorService.readAll(page, size, sortBy);
     }
     @CommandHandler(operation = 10)
     @GetMapping("/{id}")

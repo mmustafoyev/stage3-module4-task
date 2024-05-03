@@ -30,8 +30,8 @@ public class TagServiceImpl implements TagService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<TagDtoResponse> readAll() {
-        return tagMapper.listModelToDto(tagRepository.readAll());
+    public List<TagDtoResponse> readAll(int page, int size, String sortBy) {
+        return tagMapper.listModelToDto(tagRepository.readAll(page,size,sortBy));
     }
 
     @Override

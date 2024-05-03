@@ -20,8 +20,8 @@ public class CommentController {
     @CommandHandler(operation = 8)
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<CommentDtoResponse> getComments() {
-        return commentService.readAll();
+    public List<CommentDtoResponse> getComments(int page, int size, String sortBy) {
+        return commentService.readAll(page,size,sortBy);
     }
     @CommandHandler(operation = 12)
     @GetMapping("/{id}")

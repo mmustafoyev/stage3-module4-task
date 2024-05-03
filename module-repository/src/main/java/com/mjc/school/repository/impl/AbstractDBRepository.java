@@ -7,6 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.EntityType;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -27,11 +30,35 @@ public abstract class AbstractDBRepository<T extends BaseEntity<K>,K> implements
     }
 
 
-    @Override
-    public List<T> readAll() {
-        TypedQuery<T> query = entityManager.createQuery(" SELECT e FROM " +
-                entityClass.getSimpleName() + " e ", entityClass);
-        return query.getResultList();
+//    @Override
+//    public List<T> readAll() {
+//        TypedQuery<T> query = entityManager.createQuery(" SELECT e FROM " +
+//                entityClass.getSimpleName() + " e ", entityClass);
+//        return query.getResultList();
+//    }
+    //http://host:port/books?page=1&size=20&sort_by=title::asc
+    public List<T> readAll(int page, int size, String sortBy){
+        String[] order = sortBy.split("::");
+        String field = order[0];
+        String direction = null;
+        if(order.length > 1){
+            direction = order[1];
+        }
+
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> query = cb.createQuery(entityClass);
+        Root<T> entity = query.from(entityClass);
+
+        if(direction != null && direction.equalsIgnoreCase("desc")){
+            query.select(entity).orderBy(cb.desc(entity.get(field)));
+        }else {
+            query.select(entity).orderBy(cb.asc(entity.get(field)));
+        }
+        return entityManager.createQuery(query).
+                setFirstResult(size*(page-1)).
+                setMaxResults(size)
+                .getResultList();
+
     }
 
     @Override

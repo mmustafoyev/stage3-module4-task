@@ -22,8 +22,8 @@ public class TagController {
     @CommandHandler(operation = 7)
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<TagDtoResponse> getTags() {
-        return tagService.readAll();
+    public List<TagDtoResponse> getTags(int page, int size, String sortBy) {
+        return tagService.readAll(page,size,sortBy);
     }
     @CommandHandler(operation = 11)
     @GetMapping("/{id}")

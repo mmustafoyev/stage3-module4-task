@@ -23,8 +23,8 @@ public class NewsController {
     @CommandHandler(operation = 5)
     @GetMapping("/news")
     @ResponseStatus(HttpStatus.OK)
-    public List<NewsDtoResponse> getNewsList() {
-        return newsService.readAll();
+    public List<NewsDtoResponse> getNewsList(int page, int size, String sortBy) {
+        return newsService.readAll(page,size,sortBy);
     }
     @CommandHandler(operation = 9)
     @GetMapping("/news/{id}")

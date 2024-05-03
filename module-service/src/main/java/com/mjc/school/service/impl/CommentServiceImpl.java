@@ -32,8 +32,8 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<CommentDtoResponse> readAll() {
-        return commentMapper.listModelToDto(commentRepository.readAll());
+    public List<CommentDtoResponse> readAll(int page, int size, String sortBy) {
+        return commentMapper.listModelToDto(commentRepository.readAll(page,size,sortBy));
     }
 
     @Override
