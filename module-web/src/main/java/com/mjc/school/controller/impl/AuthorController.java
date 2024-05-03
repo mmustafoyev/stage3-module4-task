@@ -44,9 +44,9 @@ public class AuthorController {
         return authorService.create(authorDtoRequest);
     }
     @CommandHandler(operation = 14)
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public AuthorDtoResponse updateAuthor(@RequestBody AuthorDtoRequest authorDtoRequest) {
+    public AuthorDtoResponse updateAuthor(@PathVariable Long id, @RequestBody AuthorDtoRequest authorDtoRequest) {
         return authorService.update(authorDtoRequest);
     }
     @PatchMapping("/{id}")

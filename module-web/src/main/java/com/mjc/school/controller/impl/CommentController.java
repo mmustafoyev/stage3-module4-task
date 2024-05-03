@@ -42,15 +42,15 @@ public class CommentController {
         return commentService.create(commentDtoRequest);
     }
     @CommandHandler(operation = 16)
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public CommentDtoResponse updateComment(@RequestBody CommentDtoRequest commentDtoRequest) {
+    public CommentDtoResponse updateComment(@PathVariable Long id, @RequestBody CommentDtoRequest commentDtoRequest) {
         return commentService.update(commentDtoRequest);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public CommentDtoResponse patch(@PathVariable Long id,@RequestBody CommentDtoRequest updateRequest) {
+    public CommentDtoResponse patch(@PathVariable Long id, @RequestBody CommentDtoRequest updateRequest) {
         return commentService.update(updateRequest);
     }
     @CommandHandler(operation = 20)

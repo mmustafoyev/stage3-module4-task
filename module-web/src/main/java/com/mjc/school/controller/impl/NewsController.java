@@ -21,19 +21,19 @@ public class NewsController {
         this.newsService = newsService;
     }
     @CommandHandler(operation = 5)
-    @GetMapping("/news")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<NewsDtoResponse> getNewsList(int page, int size, String sortBy) {
         return newsService.readAll(page,size,sortBy);
     }
     @CommandHandler(operation = 9)
-    @GetMapping("/news/{id}")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public NewsDtoResponse getNewsById(@PathVariable Long id) {
         return newsService.readById(id);
     }
     @CommandHandler(operation = 24)
-    @GetMapping("/news1")
+    @GetMapping("/one-news")
     @ResponseStatus(HttpStatus.OK)
     public List<NewsDtoResponse> getNewsByParams(
             @RequestParam(required = false) NewsQueryParams newsQueryParams
@@ -41,15 +41,15 @@ public class NewsController {
         return newsService.readByQueryParams(newsQueryParams);
     }
     @CommandHandler(operation = 1)
-    @PostMapping("/news")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public NewsDtoResponse createNews(@RequestBody NewsDtoRequest newsDtoRequest) {
         return newsService.create(newsDtoRequest);
     }
     @CommandHandler(operation = 13)
-    @PutMapping("/news")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public NewsDtoResponse updateNews(@RequestBody NewsDtoRequest newsDtoRequest) {
+    public NewsDtoResponse updateNews(@PathVariable Long id, @RequestBody NewsDtoRequest newsDtoRequest) {
         return newsService.update(newsDtoRequest);
     }
     @PatchMapping("/{id}")
@@ -58,7 +58,7 @@ public class NewsController {
         return newsService.update(updateRequest);
     }
     @CommandHandler(operation = 17)
-    @DeleteMapping("/news/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteNews(@PathVariable Long id) {
         newsService.deleteById(id);

@@ -44,9 +44,9 @@ public class TagController {
         return tagService.create(tagDtoRequest);
     }
     @CommandHandler(operation = 15)
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TagDtoResponse updateTag(@RequestBody TagDtoRequest tagDtoRequest) {
+    public TagDtoResponse updateTag(@PathVariable Long id, @RequestBody TagDtoRequest tagDtoRequest) {
         return tagService.update(tagDtoRequest);
     }
     @PatchMapping("/{id}")
