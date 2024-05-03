@@ -49,6 +49,11 @@ public class TagController {
     public TagDtoResponse updateTag(@RequestBody TagDtoRequest tagDtoRequest) {
         return tagService.update(tagDtoRequest);
     }
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public TagDtoResponse patch(@PathVariable Long id, @RequestBody TagDtoRequest updateRequest) {
+        return tagService.update(updateRequest);
+    }
     @CommandHandler(operation = 19)
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

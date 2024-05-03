@@ -47,6 +47,12 @@ public class CommentController {
     public CommentDtoResponse updateComment(@RequestBody CommentDtoRequest commentDtoRequest) {
         return commentService.update(commentDtoRequest);
     }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CommentDtoResponse patch(@PathVariable Long id,@RequestBody CommentDtoRequest updateRequest) {
+        return commentService.update(updateRequest);
+    }
     @CommandHandler(operation = 20)
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

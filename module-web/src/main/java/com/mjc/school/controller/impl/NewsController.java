@@ -52,6 +52,11 @@ public class NewsController {
     public NewsDtoResponse updateNews(@RequestBody NewsDtoRequest newsDtoRequest) {
         return newsService.update(newsDtoRequest);
     }
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public NewsDtoResponse patch(@PathVariable Long id, @RequestBody NewsDtoRequest updateRequest) {
+        return newsService.update(updateRequest);
+    }
     @CommandHandler(operation = 17)
     @DeleteMapping("/news/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
